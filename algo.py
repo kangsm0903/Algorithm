@@ -99,9 +99,24 @@
 #         print(int(A) // int(B))
 #         print(int(A) % int(B))
 
+# a, b = input().split()
+
+# a = int(a)
+# b = int(b)
+
+# print(a+b, a-b, a*b, a//b, a%b)
+
+# --------------------------------------------------------------------------------------------------------------------------------
+
+# 1330번
 a, b = input().split()
 
 a = int(a)
 b = int(b)
 
-print(a+b, a-b, a*b, a//b, a%b)
+if a > b:
+    print('>')
+elif a < b:
+    print('<')
+else :
+    print('==')
