@@ -32,3 +32,15 @@ print(C)
 
 for i in range(0,N):
     print(str('%.3f' % (len(C[i])/len(A[i])*100)) + '%')
+
+# 주관적인 모범답안
+# C = int(input(()))
+# for i in range(C):
+#     N = list(map(int, input().split()))
+#     avg = sum(N[1:])/N[0]
+#     cnt = 0
+#     for j in N[1:]:
+#         if j > avg :
+#             cnt += 1
+
+#     print(str("%.3f" %round((cnt/N[0]*100, 3)))+"%")
