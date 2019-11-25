@@ -1,3 +1,5 @@
+# 11/25 15596번
+
 def solve():
     A = list(map(int, input().split()))
     ans = sum(A)
