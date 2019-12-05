@@ -1,8 +1,8 @@
-# 전화번호가 주어졌을 때 뒷 4자리 빼고 나머지를 *으로 반환하는 문제
+# 12/05 전화번호가 주어졌을 때 뒷 4자리 빼고 나머지를 *으로 반환하는 문제
 # phone_number = "01033334444"
 phone_number = "027778888"
 
-# 12/05
+
 phone_number = list(phone_number)
 
 for i in range(len(phone_number)-5, -1, -1): # len(phone_number)-5 ~ 0 까지 -1씩 감소
