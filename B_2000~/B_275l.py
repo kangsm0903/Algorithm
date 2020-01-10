@@ -1,14 +1,11 @@
-# 12/17 2751번
+# 2020/01/10 2751번 pypy3로 제출
 
 N = int(input())
 
-K = []
+M = []
 
 for i in range(0, N):
-    M = int(input())
-    K.append(M)
+    M.append(int(input()))
 
-K = sorted(K, reverse=False)
-
-for i in range(0, len(K)):
-    print(K[i])
+for i in sorted(M):
+    print(i)
