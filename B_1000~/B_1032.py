@@ -8,15 +8,8 @@ if N == 1:
 else:
     for i in range(0,N):
         A.append(list(input()))
-        
-    count = 0
 
-    for i,j in zip(A[0],A[1]):
-        if i != j:
-            A[0][count] = '?'
-        count += 1
-
-    for k in range(2,N):
+    for k in range(1,N):
         number = 0
         for i,j in zip(A[0],A[k]):
             if i != j:
