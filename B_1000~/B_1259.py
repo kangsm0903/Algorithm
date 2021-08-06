@@ -7,8 +7,8 @@ while B != ['0']:
 
 for i in A:
     C = list(reversed(i))
-    x = "".join([str(l) for l in i])
-    y = "".join([str(l) for l in C])
+    x = "".join(i)
+    y = "".join(C)
     if x == '0' or y == '0':
         break
     elif x == y:
