@@ -1,4 +1,3 @@
 a = input().split(" ")
-print(round(float(a[0])/float(a[1]), 3))
 
-#보류
+print("{:.3f}".format(float(a[0])/float(a[1])))
