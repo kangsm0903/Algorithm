@@ -24,3 +24,31 @@ for i in range(len(N)): # 0~8
 result.sort()
 for k in result:
     print(k)
+
+# ------------------------------------------------------------------------------------
+# Brute Force O(n^2)
+import sys
+
+height=[]
+
+for i in range(9):
+    height.append(int(sys.stdin.readline()))
+    # height=[7 8 10 13 15 19 20 23 25]
+
+height.sort()
+H=height.copy()
+All=sum(height)-100 # 
+breaker=False
+
+for i in range(len(height)-1): # 0~8
+    for k in height[i+1:]:
+        if height[i]+k==All:
+            H.remove(height[i])
+            H.remove(k)
+            breaker=True
+            break
+    if breaker==True:
+        break
+
+for k in H:
+    print(k)
