@@ -1,3 +1,3 @@
-## ✨ 백준 알고리즘 단계별 문제풀기(최소 하루에 1문제 실천 중) ✨
+Algorithm with Python : Greedy - Brute Force - Dynamic
 
-## 🐱‍🏍 B_ == 백준 알고리즘 , prob ==  프로그래머스 🐱‍🏍
+끄적끄적 알고리즘..
