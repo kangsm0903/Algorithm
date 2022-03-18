@@ -9,9 +9,7 @@ case=[]
 for i in range(N):
     case.append(list(map(int,sys.stdin.readline().split()))) # [p,d] [돈, 날짜]
 
-case.sort(key=lambda x:x[1])
-
-print(case) # [[20, 1], [2, 1], [100, 2], [8, 2], [10, 3], [50, 10], [5, 20]]
+case.sort(key=lambda x:x[1]) # [[20, 1], [2, 1], [100, 2], [8, 2], [10, 3], [50, 10], [5, 20]]
 
 heaps=[]
 
