@@ -20,6 +20,7 @@ print(max(result)) # 결과값의 최댓값을 반환
 
 # ----------------------------------------------------------------------------------------------
 # O(n^2)
+# 단순 이중 for문으로 원소들을 순차적으로 비교하게 했음
 import sys
 
 N=int(sys.stdin.readline())
@@ -28,7 +29,7 @@ case=list(map(int,sys.stdin.readline().split()))
 
 result=[]
 
-for i in range(0,len(case)):
+for i in range(0,len(case)): 
     cnt=0
     for k in range(i+1,len(case)):
         if case[i]<case[k]:
