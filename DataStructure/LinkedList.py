@@ -1,5 +1,5 @@
 class SList:
-
+    
     class Node:
         def __init__(self, item, link): # 노드 생성자
             self.item=item # element
@@ -98,12 +98,12 @@ class LinkedList:
     
     # 삽입
     def add_node(self, index, value):
-        new_node=Node(value)
+        new_node=Node(value) # 새 노드
         if index==0:
             new_node.next=self.head
             self.head=new_node
             return
-        node=self.get_node(index-1)
+        node=self.get_node(index-1) # B
         next_node=node.next
         node.next=new_node
         new_node.next=next_node
