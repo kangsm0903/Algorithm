@@ -1,4 +1,4 @@
-from ArrayBasedListADT import MyList
+from MyList import MyList
 
 class ArrayBasedList(MyList):
     length=0
