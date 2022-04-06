@@ -1,3 +1,5 @@
+# 과제 1
+
 from MyList import MyList
 
 class ArrayBasedList(MyList):
@@ -53,6 +55,8 @@ A.insertItem('3',0)
 A.insertItem('1',0) # 4,3,1을 position 0에 insert
 
 A.insertItem('2',1) # 2를 position 1에 insert
+
+A.printMyList()     # list 출력
 
 A.removeItem(3)     # position 3을 삭제
 A.removeItem(1)     # position 1을 삭제
