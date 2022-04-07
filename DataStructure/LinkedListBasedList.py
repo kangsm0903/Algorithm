@@ -1,3 +1,5 @@
+# 과제 2
+
 from MyList import MyList
 class Node(object):
 
@@ -29,9 +31,9 @@ class LinkedList(MyList):
     def getitem(self, j):               # j 번째 인덱스 노드 반환
         count=0
         node=self.head
-        while count<j:                  # j 직전까지 계속 while 돌리면서 get_next(), 마지막에 node.get_data()
+        while count<j:                 # j 직전까지 계속 while 돌리면서 get_next(), 마지막에 node.get_data()
             count+=1
-            node.next_node
+            node=node.next_node
         return node
 
     def setitem(self, val, j):          # j번째에 val 넣기
@@ -58,12 +60,12 @@ class LinkedList(MyList):
     def removeItem(self, j=0):          # A -> B -> C -> D 에서 C를 삭제하고 싶음
         if (j==0):                      # 만약 j==0이라면
             self.head=self.head.next_node     # head의 다음 노드를 head로 설정
+            self.length-=1
             return
         else:
             preNode=self.getitem(j-1)       # node = B
             preNode.next_node=preNode.next_node.next_node
-            # nextNode=self.getitem(j+1)      # node = D
-            # preNode.next_node=nextNode      # B -> D
+            self.length-=1
 
     def printMyList(self):
         node=self.head
@@ -75,13 +77,14 @@ class LinkedList(MyList):
 S=LinkedList()
 S.insertItem('4',0) # '4','3','1'을 position 0에 insert
 S.insertItem('3',0)
-S.insertItem('1',0)
+S.insertItem('1',0) 
 
 S.insertItem('2',1) # '2'를 position 1에 insert
-S.printMyList()     # 출력
 
-S.removeItem(3)     # position 3, position 1, position 0 remove
-S.removeItem(1)     
-S.removeItem(0)
+S.printMyList() # 출력 1 2 3 4
 
-S.printMyList()     # 출력
+S.removeItem(3) # position 3 제거
+S.removeItem(1) # position 1 제거
+S.removeItem(0) # position 0 제거
+
+S.printMyList()
