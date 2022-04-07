@@ -39,7 +39,7 @@ class SList:
         t=p.next # t에 p.next 레퍼런스를 할당
         p.next=t.next # p.next.next 레퍼런스를 p.next에 할당 
         # A -> B -> C 일 때 p.next = B를 p.next.next = C 로 할당해서 B를 삭제한 것
-        self.size+=1
+        self.size-=1
 
     def search(self,target):
         p=self.head
@@ -72,8 +72,8 @@ class Node:
 # Linked List 클래스 정의
 class LinkedList:
     # 초기화 메소드
-    def __init__(self,data):
-        self.head=None(data)
+    def __init__(self):
+        self.head=None
 
     # head부터 탐색하면서 뒤에 새로운 노드 추가
     def append(self, data):
@@ -85,8 +85,9 @@ class LinkedList:
     def print_all(self):
         cur=self.head
         while cur is not None:
-            print(cur.data)
+            print(cur.data, end=" ")
             cur=cur.next
+        print()
         
     def get_node(self, index):
         cnt=0
@@ -118,3 +119,12 @@ class LinkedList:
 
         # [5]->[12]->[8]  ----[6]----
         # 삭제하려는 [6]의 전 노드 [5]를 할당하고 [5]의 next.next와 연결
+
+H=LinkedList()
+H.add_node(0,1)
+H.add_node(1,2)
+H.add_node(2,3)
+H.add_node(3,4)
+H.print_all()
+
+print(H.get_node(3).data)
