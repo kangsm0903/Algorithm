@@ -1,3 +1,5 @@
+# 과제 4
+
 from LinkedListBasedQueueADT import MyQueue
 
 class Node(object):
@@ -26,12 +28,14 @@ class LinkedListBasedQueue(MyQueue):
         return self.length
 
     def first(self):        # head의 데이터값 반환
+        if self.is_empty(): # 큐가 비어있으면 비어있다고 리턴
+            return "Queue is empty"
         return self.head.data
 
     def is_empty(self):     # 비어있으면 True 아니면 False
         return self.head==None
 
-    def enqueue(self, data): # 맨 뒤에 넣음
+    def enqueue(self, data): # 큐이기에 맨 뒤에 삽입
         new_node=Node(data)  # data를 가진 새 노드 생성
 
         if self.tail==None:  # tail==None이라면 head==tail==새 노드
@@ -45,7 +49,7 @@ class LinkedListBasedQueue(MyQueue):
 
     def dequeue(self, j=0):
         if self.is_empty():
-            return "queue is empty"
+            return "Queue is empty"
         node=self.head      # head를 node에 할당
         self.head=node.next_node # node의 다음 노드를 head로 설정 - 그 전의 노드는 사라짐
         self.length-=1
@@ -61,21 +65,22 @@ class LinkedListBasedQueue(MyQueue):
             node=node.next_node
         print()
 
-R=LinkedListBasedQueue()
+q=LinkedListBasedQueue() # 큐 생성
 
-R.enqueue(5)            # 5, 3 추가
-R.enqueue(3)
+q.enqueue(5)            # 5, 3 insert
+q.enqueue(3)
 
-print(R.len())          # 길이 출력
+q.printMyList()         # q 출력
+print(q.len())          # q.length 출력
 
-R.dequeue()             # item 2개 제거
-R.dequeue()
+q.dequeue()             # item 2개 제거
+q.dequeue()
 
-print(R.is_empty())     # is_empty 확인
+print(q.is_empty())     # is_empty 확인
 
-print(R.dequeue())      # item 제거 시도
+print(q.dequeue())      # item 제거 시도 결과
 
-R.enqueue(7)            # 7, 9 추가
-R.enqueue(9)
+q.enqueue(7)            # 7, 9 insert
+q.enqueue(9)
 
-print(R.first())        # 첫 item 출력
+print(q.first())        # 첫 item 출력
