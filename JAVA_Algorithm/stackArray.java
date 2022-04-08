@@ -1,5 +1,3 @@
-package JAVA_Algorithm;
-
 import java.util.Arrays;
 
 public class stackArray {

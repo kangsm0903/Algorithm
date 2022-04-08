@@ -1,5 +1,3 @@
-package JAVA_Algorithm;
-
 public class divideInt {
 
 	public static void main(String[] args) {
