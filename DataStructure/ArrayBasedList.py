@@ -28,6 +28,10 @@ class ArrayBasedList(MyList):
     def insertItem(self, item, j=0):
         if (self.length>=self.size): # length가 size를 넘었을 때
             raise ValueError('array is full')
+        if (j<0): # j가 음수라면 self.length+j로 양수 인덱스로 변환
+            j=self.length+j
+        if (j>=self.size): # j가 self.length보다 크거나 같으면 인덱스 범위 초과 오류 출력
+            raise ValueError("index out of bound")
         else: # self.length<self.size
             for i in range(self.length,j,-1):
                 self.item[i]=self.item[i-1]
@@ -39,8 +43,6 @@ class ArrayBasedList(MyList):
             for i in range(j, self.length):
                 self.item[i]=self.item[i+1]
             self.length-=1    # 길이 1 빼기
-        elif (self.length==j):
-            self.item[j]=[None]
         else:
             raise ValueError('index is out of bound')
 
