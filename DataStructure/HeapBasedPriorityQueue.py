@@ -30,12 +30,12 @@ class HeapPriorityQueue(object):
             left=self.left(j) # 왼쪽 값 인덱스 반환
         if self.has_right(j): # 오른쪽 값이 존재
             right=self.right(j) # 오른쪽 값 인덱스 반환
-        if self.data[left]<self.data[right]:
+        if self.data[left][0]<self.data[right][0]:
             small_child=left
         else:
             small_child=right
         # 왼쪽 오른쪽 중 누가 더 작은 지 확인됐다면 swap할려는 값과 비교
-        if self.data[j]>self.data[small_child]:
+        if self.data[j][0]>self.data[small_child][0]:
             self.swap(j,small_child) # j와 small_child가 데이터값이 아니라 인덱스 값이기에 데이터만 swap
             self.downheap(small_child) # small_child 인덱스 값으로 재귀
 
@@ -65,6 +65,7 @@ class HeapPriorityQueue(object):
             raise ValueError("Priority Queue is empty")
         self.swap(0,len(self.data)-1) # root와 last node swap
         item=self.data.pop() # 배열의 pop(공백)은 맨 마지막 값을 반환함 -> 전 root 반환
+        self.downheap(0)
         return (item[0], item[1])
 
     def printMyList(self):
@@ -74,19 +75,19 @@ class HeapPriorityQueue(object):
 
 if __name__ == '__main__':
     H=HeapPriorityQueue();
-    H.add(3,12) 
-    H.printMyList()  
+    H.add(3,12)  
+    H.printMyList()
     H.add(6,1)
-    H.printMyList()  
+    H.printMyList()
     H.add(15,1)
     H.printMyList()
     H.add(12,30)  
-    H.printMyList()  
+    H.printMyList()
     H.add(2,20)
-    H.printMyList()         # (2,20) (3,12) (15,1) 로 정렬 됨
-    # print(H.return_min())   # (2,20) 최소 key값인 노드 출력
-    H.remove_min()          # 최소 key값 (2,20) 삭제
-    H.printMyList()         # (15)
-
-    # upheap과 downheap을 할 때 특정 노드만을 기준으로 up,downheap을 하기에 
-    # 맨 앞(root)빼고 뒤에는 순서가 뒤죽박죽인 것이였음
+    H.printMyList()
+    H.remove_min()
+    H.printMyList()
+    print(H.return_min())
+    
+    # upheap과 downheap을 할 때 swap할 노드 2개만 다루기에 
+    # up,downheap을 거쳐간 노드를 제외하면 순서가 뒤죽박죽인 것이였음 - heap정렬이 root빼고 뒤죽박죽인 이유
