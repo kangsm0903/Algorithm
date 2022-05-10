@@ -4,13 +4,13 @@ blank=[] # graph의 빈 칸의 위치정보를 넣어줌
 
 def solveSudoku2by2(sudoku):
     global case
-    case=[]
-    case.append(copy.deepcopy(sudoku))
+    case=[] 
+    case.append(copy.deepcopy(sudoku)) # case에 카피된 것들 추가
     for i in range(4):
         for j in range(4):
             if sudoku[i][j]==0:
-                blank.append((i,j))
-    result=dfs(0,sudoku)
+                blank.append((i,j)) # blank에 빈 위치 삽입
+    result=dfs(0,sudoku) # dfs 돌림
     print(result[-1])
     print()
     for i in result:
@@ -37,15 +37,15 @@ def is_promising(sudoku,i,j):
 def dfs(count, sudoku):
     if count == len(blank):
         global gamma
-        gamma=copy.deepcopy(case)
+        gamma=copy.deepcopy(case) # case 자체를 복사하네
         return gamma
     (i,j)=blank[count]
     promise=is_promising(sudoku,i,j) # 빈 칸에 들어갈 수 있는 숫자 후보
     for num in promise:
         sudoku[i][j]=num
-        beta=copy.deepcopy(sudoku)
-        case.append(beta)
+        case.append(copy.deepcopy(sudoku))
         dfs(count+1, sudoku)
+        del case[-1]
         sudoku[i][j]=0
     try:
         return gamma
