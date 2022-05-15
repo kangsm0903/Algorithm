@@ -1,8 +1,6 @@
 import doctest
 import copy
 
-blank=[] # graph의 빈 칸의 위치정보를 넣어줌
-
 def solveSudoku2by2(sudoku):
     '''DFS, 백트래킹으로 최종 결과 값을 반환하는 함수
 
@@ -17,26 +15,32 @@ def solveSudoku2by2(sudoku):
         case에 있는 스도쿠 기록들을 모두 출력한다.
 
     Note:
-        case==None이라면 빈 칸에 들어갈 수 있는 수가 없다는 뜻으로
+        case==None이라면 빈 칸에 들어갈 수 있는 수가 없음을 나타냄으로
         "Impossible"을 출력
     '''
-    global case
+    global case, blank, gamma
     case=[] 
-    case.append(copy.deepcopy(sudoku)) # case에 카피된 것들 추가
+    blank=[] 
+    gamma=None
+    case.append(copy.deepcopy(sudoku)) 
     empty(sudoku)
-    case=dfs(0,sudoku) # dfs 돌림
+    case=dfs(0,sudoku) # DFS 돌림
     if case==None:
-        # print("Impossible")
         return "Impossible"
     else:
-        # print(case[-1])
         return case[-1]
-        # print()
-        # print('tree depth, a\n')
-        # for i in range(len(case)):
-        #     print(i+1, end='')
-        #     print(',', end='')
-        #     print(case[i])
+
+def Tree():
+    if case==None:
+        pass
+    else:
+        print()
+        print('tree depth, a\n')
+        for i in range(len(case)):
+            print(i+1, end='')
+            print(',', end='')
+            print(case[i])
+
 
 def empty(arr):
     '''스도쿠의 빈 칸의 위치를 반환하는 함수
@@ -49,6 +53,7 @@ def empty(arr):
     Return:
         blank(Array): 스도쿠 빈 칸의 위치 정보를 담은 리스트
     '''
+
     for i in range(4): 
         for k in range(4): 
             if arr[i][k]==0:
@@ -81,7 +86,7 @@ def is_promising(sudoku,i,j):
 
     i=i//2
     j=j//2
-    for p in range(i*2, (i+1)*2):
+    for p in range(i*2, (i+1)*2): # 2*2 검사
         for q in range(j*2,(j+1)*2):
             if sudoku[p][q] in promising:
                 promising.remove(sudoku[p][q])
@@ -124,7 +129,8 @@ def dfs(count, sudoku):
 if __name__=='__main__':
     a=[[0,2,1,3], [0,0,0,0], [0,0,0,0], [2,1,3,0]]
     print(solveSudoku2by2(a))
-
+    Tree()
+    
 doctest.testmod()
 
 # a=[[2,3,1,4], [1,2,4,0], [3,4,0,2], [0,0,0,1]] impossible
