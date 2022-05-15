@@ -11,35 +11,44 @@ def solveSudoku2by2(sudoku):
         sudoku(Array): 처음 문제에서 주어지는 스도쿠
 
     Return:
-        전역변수 case[-1] 맨 마지막 기록 (최종 스도쿠)를 반환하고
-        case에 있는 스도쿠 기록들을 모두 출력한다.
+        전역변수 result[-1] 마지막 결과값을 반환한다.
 
     Note:
-        case==None이라면 빈 칸에 들어갈 수 있는 수가 없음을 나타냄으로
-        "Impossible"을 출력
+        result==None이라면 빈 칸에 들어갈 수 있는 수가 없음을 나타냄으로
+        "Impossible"을 반환
+
+    >>> solveSudoku2by2([[2,3,1,4], [1,2,4,0], [3,4,0,2], [0,0,0,1]])
+    'Impossible'
+
+    >>> solveSudoku2by2([[0,2,1,3], [0,0,0,0], [0,0,0,0], [2,1,3,0]])
+    [[4, 2, 1, 3], [1, 3, 4, 2], [3, 4, 2, 1], [2, 1, 3, 4]]
+
+    >>> solveSudoku2by2([[0,3,1,2], [0,0,0,0], [0,0,0,0], [2,1,3,0]])
+    [[4, 3, 1, 2], [1, 2, 4, 3], [3, 4, 2, 1], [2, 1, 3, 4]]
     '''
-    global case, blank, gamma
+    global case, blank, gamma, depth, result
     case=[] 
     blank=[] 
+    result=[]
     gamma=None
-    case.append(copy.deepcopy(sudoku)) 
+    depth=1
+    case.append([depth, copy.deepcopy(sudoku)]) 
     empty(sudoku)
-    case=dfs(0,sudoku) # DFS 돌림
-    if case==None:
+    result=dfs(0,sudoku,depth+1) # DFS 돌림
+    if result==None:
         return "Impossible"
     else:
-        return case[-1]
+        result.sort()
+        return (result[-1][1]) # 결과값 반환
 
 def Tree():
-    if case==None:
+    if result==None:
         pass
     else:
         print()
         print('tree depth, a\n')
-        for i in range(len(case)):
-            print(i+1, end='')
-            print(',', end='')
-            print(case[i])
+        for i in result:
+            print(*i, sep=', ')
 
 
 def empty(arr):
@@ -52,6 +61,9 @@ def empty(arr):
 
     Return:
         blank(Array): 스도쿠 빈 칸의 위치 정보를 담은 리스트
+
+    >>> empty([[0,2,1,3], [0,0,0,0], [0,0,0,0], [2,1,3,0]])
+    [(0, 0), (1, 0), (1, 1), (1, 2), (1, 3), (2, 0), (2, 1), (2, 2), (2, 3), (3, 3), (0, 0), (1, 0), (1, 1), (1, 2), (1, 3), (2, 0), (2, 1), (2, 2), (2, 3), (3, 3)]
     '''
 
     for i in range(4): 
@@ -75,6 +87,9 @@ def is_promising(sudoku,i,j):
 
     Note:
         빈 칸에 들어갈 수 있는 수가 없는 경우 빈 리스트가 반환된다.
+
+    >>> is_promising([[0,2,1,3], [0,0,0,0], [0,0,0,0], [2,1,3,0]],0,0)
+    [4]
     '''
     promising=[1,2,3,4]
 
@@ -93,7 +108,7 @@ def is_promising(sudoku,i,j):
 
     return promising
 
-def dfs(count, sudoku):
+def dfs(count, sudoku, depth):
     '''DFS와 백트래킹을 통해 스도쿠를 채우는 함수
 
     blank 리스트의 첫번째 빈 칸부터 filter 함수를 통해 유망한 값을 하나씩 넣어 스도쿠 규칙에 맞는 지 봄
@@ -117,9 +132,9 @@ def dfs(count, sudoku):
     promise=is_promising(sudoku,i,j) # 빈 칸에 들어갈 수 있는 숫자 후보
     for num in promise:
         sudoku[i][j]=num
-        case.append(copy.deepcopy(sudoku))
-        dfs(count+1, sudoku)
-        del case[-1]
+        case.append([depth, copy.deepcopy(sudoku)])
+        dfs(count+1, sudoku, depth+1)
+        # del case[-1]
         sudoku[i][j]=0
     try:
         return gamma
@@ -130,8 +145,7 @@ if __name__=='__main__':
     a=[[0,2,1,3], [0,0,0,0], [0,0,0,0], [2,1,3,0]]
     print(solveSudoku2by2(a))
     Tree()
-    
-doctest.testmod()
+    doctest.testmod()
 
 # a=[[2,3,1,4], [1,2,4,0], [3,4,0,2], [0,0,0,1]] impossible
 # a=[[2,3,1,4], [1,2,3,0], [3,4,0,2], [0,0,0,1]] impossible
