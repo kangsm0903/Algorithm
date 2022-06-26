@@ -60,3 +60,5 @@ for i in range(n):
             dequeue.append(queue.popleft())
 
 result=dequeue+queue
+
+print(''.join(result))
