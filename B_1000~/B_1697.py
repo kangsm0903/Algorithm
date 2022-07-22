@@ -1,3 +1,6 @@
+# 다른 BFS 문제들과 다른 점으로는 nx=x+dx[i] 같이 방향벡터를 사용한 것이 아니라
+# for i in (x-1,x+1,x*2) 로 3가지의 경우를 고려한 점이 가장 큰 차이점이자 이 문제의 핵심이라고 생각한다.
+
 from collections import deque
 
 N,K=map(int,input().split()) # N - 수빈이 위치 / K - 동생 위치
