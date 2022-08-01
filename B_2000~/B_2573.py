@@ -1,3 +1,75 @@
+def bfs(x,y):
+    queue=deque()
+    queue.append((x,y))
+    seaList=[]
+
+    while queue:
+        x,y=queue.popleft()
+        visited[x][y]=1
+        sea=0
+        for i in range(4):
+            nx=x+dx[i]
+            ny=y+dy[i]
+
+            if 0<=nx<N and 0<=ny<M:
+                # 주변이 바다라면 sea+=1
+                if graph[nx][ny]==0 and visited[nx][ny]==0:
+                    sea+=1
+                # 주변이 빙하라면 queue에 추가
+                elif graph[nx][ny]>0 and visited[nx][ny]==0:
+                    queue.append((nx,ny))
+                    visited[nx][ny]=1
+        if sea>0:
+            seaList.append((x,y,sea))
+    
+    for x, y, sea in seaList:
+        graph[x][y]=max(0,graph[x][y]-sea)
+                
+    return 1
+
+from collections import deque
+
+N,M=list(map(int,input().split()))
+
+graph=[list(map(int,input().split())) for _ in range(N)]
+
+dx=[-1,1,0,0]
+dy=[0,0,-1,1]
+
+ice=[]
+
+# 빙하의 위치 할당
+for i in range(N):
+    for j in range(M):
+        if graph[i][j]>0:
+            ice.append((i,j))
+
+year=0
+
+while ice:
+    group=0
+    visited=[[0]*M for _ in range(N)]
+    delList=[]
+    
+    for i,j in ice:
+        # 빙하가 존재하는 경우
+        if graph[i][j]>0 and visited[i][j]==0:
+            group+=bfs(i,j)
+        # 빙하가 다 녹은 경우
+        if graph[i][j]==0 and visited[i][j]==1:
+            delList.append((i,j))
+
+    if group>1:
+        print(year)
+        break
+
+    ice=list(set(ice)-set(delList))
+    year+=1
+
+if group<2:
+    print(0)
+
+# --------------------------------------------------------------------------------
 # 빙하 지역 카운트를 dfs로 설계해서 dfs, bfs 둘 다 구현하다보니 시간,메모리 초과 발생
 
 import sys
