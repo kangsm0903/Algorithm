@@ -49,3 +49,34 @@ recursive(0,0,N)
 print(minus)
 print(zero)
 print(one)
+
+# -------------------------------------------------------------------------
+# 똑같은 풀이인데 반복문을 통해 좀 더 간결하게 표현
+
+N=int(input())
+
+graph=[list(map(int,input().split())) for _ in range(N)]
+
+minus=0
+zero=0
+one=0
+
+def recursive(row,column,n):
+    global minus, zero, one
+
+    base=graph[row][column]
+
+    for i in range(row,row+n):
+        for j in range(column,column+n):
+            if graph[i][j]!=base:
+                for k in range(3): # 0 1 2
+                    for l in range(3): # 0 1 2
+                        recursive(row+(k*n//3),column+(l*n//3),n//3)
+                    return
+
+    if base==-1:
+        minus+=1
+    elif base==0:
+        zero+=1
+    elif base==1:
+        one+=1
