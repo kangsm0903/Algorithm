@@ -71,3 +71,33 @@ def BackTrack(row):
 BackTrack(0)
 
 print(cnt)
+
+# -------------------------------------------------------------------------------
+def dfs(queen,n,row):
+    count=0
+
+    if n==row: # 조건에 맞으면 1 반환
+        return 1
+
+    for col in range(n): # column 하나씩 삽입
+        queen[row]=col
+
+        for x in range(row): # 세로 겹치는 지 확인
+            if queen[x]==queen[row]:
+                break
+
+            if abs(queen[x]-queen[row])==abs(x-row):
+                # 대각선 겹치는 지 확인
+                break
+            else: # 조건에 맞으면 다음 행으로 DFS
+                count+=dfs(queen,n,row+1)
+    return count # 마지막 count값 반환
+
+def solution(n):
+    queen=[0]*n
+
+    return dfs(queen,n,0)
+
+N=int(input())
+
+print(solution(N))
